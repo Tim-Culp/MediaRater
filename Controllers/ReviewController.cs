@@ -39,10 +39,10 @@ namespace MediaRater.Controllers
             if (ModelState.IsValid)
             {
                 _db.Reviews.Add(rev);
-                Media med = _db.Media.Find(rev.OnMedia.MediaID);
+                //Media med = _db.Media.Find(rev.OnMedia.MediaID);
                 System.Diagnostics.Debug.WriteLine("Rev: " + rev.MediaID.ToString());
                 //med.Reviews.Add(rev);
-                _db.Entry(med).State = System.Data.Entity.EntityState.Modified;
+                //_db.Entry(med).State = System.Data.Entity.EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Media");
 
@@ -71,10 +71,10 @@ namespace MediaRater.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Review eh = _db.Reviews.Find(id);
-            _db.Reviews.Remove(eh);
+            Review revs = _db.Reviews.Find(id);
+            _db.Reviews.Remove(revs);
             _db.SaveChanges();
-            return RedirectToAction("Details", "Media", new { id = eh.MediaID });
+            return RedirectToAction("Details", "Media", new { id = revs.MediaID });
         }
     }
 }

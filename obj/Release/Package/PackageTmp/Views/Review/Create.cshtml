@@ -1,0 +1,49 @@
+﻿@model MediaRater.Models.Review
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Review</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StarRating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StarRating, new { htmlAttributes = new { @class = "form-control", @Value = 1, max = 5, min = 1} })
+                @Html.ValidationMessageFor(model => model.StarRating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.EditorFor(model => model.MediaID, new {htmlAttributes = new { type = "hidden", @class = "form-control"} })
+        @Html.EditorFor(model => model.OnMedia.Name, new { htmlAttributes = new { type = "hidden", @readonly = "true" } })
+        @Html.EditorFor(model => model.OnMedia.Description, new { htmlAttributes = new { type = "hidden", @readonly = "true" } })
+        @Html.EditorFor(model => model.OnMedia.AgeRating, new { htmlAttributes = new { type = "hidden", @readonly = "true" } })
+        @Html.EditorFor(model => model.OnMedia.MediaID, new { htmlAttributes = new { type = "hidden", @readonly = "true" } })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Media", "Details", "Media", new { id = Model.MediaID }, null)
+</div>

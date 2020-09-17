@@ -1,0 +1,65 @@
+﻿
+@model MediaRater.Models.MediaDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeRating)
+        </dd>
+        <dt>
+            @*    @Html.DisplayNameFor(model => model.Reviews)*@
+        </dt>
+
+        @foreach (MediaRater.Models.Review review in Model.Reviews)
+        {
+            <hr />
+            <dt>
+                @Html.DisplayNameFor(model => review.Text)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => review.Text)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => review.StarRating)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => review.StarRating)/5
+            </dd>
+            @Html.ActionLink("Delete", "Delete", "Review", new { id = review.ReviewID }, new { @class = "col-md-offset-1" })
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MediaID }) |
+    @Html.ActionLink("Create Review", "Create", "Review", new { id = Model.MediaID }, null) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
